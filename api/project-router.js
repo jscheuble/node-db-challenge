@@ -38,4 +38,19 @@ router.post("/", (req, res) => {
     });
 });
 
+router.post("/:id/addtasks", (req, res) => {
+  db.addTask(req.body)
+    .then((task) => {
+      if (task) {
+        res.status(201).json(task);
+      } else {
+        res.status(404).json({ message: "task not found" });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ message: "unable to find task", err });
+    });
+});
+
 module.exports = router;

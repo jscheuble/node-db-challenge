@@ -9,6 +9,7 @@ module.exports = {
   addProject,
   getTasks,
   getTaskById,
+  addTask,
 };
 
 function getResources() {
@@ -68,4 +69,12 @@ function getTaskById(id) {
       "p.description as project_description"
     )
     .where({ "t.id": id });
+}
+
+function addTask(task) {
+  return db("task")
+    .insert(task)
+    .then((id) => {
+      return getTaskById(id[0]);
+    });
 }
