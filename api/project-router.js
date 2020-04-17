@@ -24,6 +24,7 @@ router.get("/:id", (req, res) => {
       res.status(200).json(project);
     })
     .catch((err) => {
+      console.log(err);
       res.status(500).json({ message: "unable to retrieve project", err });
     });
 });
@@ -34,7 +35,9 @@ router.post("/", (req, res) => {
       res.status(201).json(project);
     })
     .catch((err) => {
-      res.status(500).json({ message: "unable to create new project sry" });
+      res
+        .status(500)
+        .json({ message: "unable to create new project sry", err });
     });
 });
 
@@ -50,6 +53,16 @@ router.post("/:id/addtask", (req, res) => {
     .catch((err) => {
       console.log(err);
       res.status(500).json({ message: "unable to find task", err });
+    });
+});
+
+router.delete("/:id", (req, res) => {
+  db.destroyProject(req.params.id)
+    .then(() => {
+      res.status(200).json({ message: "successfully deleted l8r sk8r" });
+    })
+    .catch((err) => {
+      res.status(500).json({ message: "unable to delete", err });
     });
 });
 

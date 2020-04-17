@@ -6,6 +6,7 @@ module.exports = {
   addResource,
   getProjects,
   getProjectById,
+  destroyProject,
   addProject,
   getTasks,
   getTaskById,
@@ -34,6 +35,10 @@ function getProjects() {
 
 function getProjectById(id) {
   return db("project").where({ id }).first();
+}
+
+function destroyProject(id) {
+  return db("project").where({ id }).del();
 }
 
 function addProject(project) {
