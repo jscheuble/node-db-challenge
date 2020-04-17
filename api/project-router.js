@@ -38,7 +38,7 @@ router.post("/", (req, res) => {
     });
 });
 
-router.post("/:id/addtasks", (req, res) => {
+router.post("/:id/addtask", (req, res) => {
   db.addTask(req.body)
     .then((task) => {
       if (task) {
