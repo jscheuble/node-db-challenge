@@ -28,4 +28,14 @@ router.get("/:id", (req, res) => {
     });
 });
 
+router.post("/", (req, res) => {
+  db.addProject(req.body)
+    .then((project) => {
+      res.status(201).json(project);
+    })
+    .catch((err) => {
+      res.status(500).json({ message: "unable to create new project sry" });
+    });
+});
+
 module.exports = router;

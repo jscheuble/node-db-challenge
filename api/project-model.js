@@ -6,6 +6,7 @@ module.exports = {
   addResource,
   getProjects,
   getProjectById,
+  addProject,
 };
 
 function getResources() {
@@ -19,7 +20,9 @@ function getResourceById(id) {
 function addResource(resource) {
   return db("resource")
     .insert(resource)
-    .then((id) => ({ id: id[0] }));
+    .then((id) => {
+      return getResourceById(id[0]);
+    });
 }
 
 function getProjects() {
@@ -28,4 +31,12 @@ function getProjects() {
 
 function getProjectById(id) {
   return db("project").where({ id }).first();
+}
+
+function addProject(project) {
+  return db("project")
+    .insert(project)
+    .then((id) => {
+      return getProjectById(id[0]);
+    });
 }
